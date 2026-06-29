@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso IZone B2B</title>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+        // Tu configuración
+        const firebaseConfig = {
+            apiKey: "AIzaSyBaXeDE2iz3sr-9dl-bIvKBQL7OW8nuAy0",
+            authDomain: "izone-b2b-auth.firebaseapp.com",
+            projectId: "izone-b2b-auth",
+            storageBucket: "izone-b2b-auth.firebasestorage.app",
+            messagingSenderId: "282285671483",
+            appId: "1:282285671483:web:28122334529cf2f01ac81e",
+            measurementId: "G-SHC91K519Z"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        document.getElementById("btnGoogle").addEventListener("click", () => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    alert("¡Bienvenido! Has iniciado sesión correctamente.");
+                    // Redirigir a tu página de compras
+                    window.location.href = "https://www.izonelatam.work.gd/verificar-compra";
+                })
+                .catch((error) => {
+                    alert("Error al iniciar sesión: " + error.message);
+                });
+        });
+    </script>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 320px; text-align: center; }
+        h2 { color: #333; margin-bottom: 20px; }
+        button { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer; background: white; font-weight: bold; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        button:hover { background: #f8f8f8; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>Acceso IZone B2B</h2>
+        <button id="btnGoogle">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20">
+            Continuar con Google
+        </button>
+    </div>
+</body>
+</html>
