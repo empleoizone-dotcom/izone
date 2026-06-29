@@ -23,16 +23,17 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        document.getElementById("btnGoogle").addEventListener("click", () => {
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    alert("¡Bienvenido! Has iniciado sesión correctamente.");
-                    // Redirigir a tu página de compras
-                    window.location.href = "https://www.izonelatam.work.gd/verificar-compra";
-                })
-                .catch((error) => {
-                    alert("Error al iniciar sesión: " + error.message);
-                });
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("btnGoogle").addEventListener("click", () => {
+                signInWithPopup(auth, provider)
+                    .then((result) => {
+                        alert("¡Bienvenido! Has iniciado sesión correctamente.");
+                        window.location.href = "https://www.izonelatam.work.gd/verificar-compra";
+                    })
+                    .catch((error) => {
+                        alert("Error al iniciar sesión: " + error.message);
+                    });
+            });
         });
     </script>
     <style>
@@ -47,7 +48,7 @@
     <div class="login-card">
         <h2>Acceso IZone B2B</h2>
         <button id="btnGoogle">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="20" alt="Google">
             Continuar con Google
         </button>
     </div>
