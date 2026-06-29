@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificación de Compra - IZone</title>
+    <!-- Carga de la API de Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCP-qsv8Ig84wtzJn8CqKoggjVRFS62DRg&libraries=places"></script>
+</head>
+<body>
+    <h2>Datos de envío</h2>
+    <input type="text" id="direccion" placeholder="Escribe tu dirección aquí...">
+    <button id="btn-finalizar">Finalizar compra</button>
+
+    <script>
+        // Inicializar autocompletado
+        const input = document.getElementById('direccion');
+        new google.maps.places.Autocomplete(input, { 
+            componentRestrictions: { country: 'VE' } 
+        });
+
+        document.getElementById('btn-finalizar').addEventListener('click', () => {
+            alert("Dirección validada: " + input.value);
+            // Aquí agregaremos la lógica para guardar en Firebase en el siguiente paso
+        });
+    </script>
+</body>
+</html>
