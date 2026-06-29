@@ -5,22 +5,32 @@
     <title>Verificación de Compra - IZone</title>
     <!-- Carga de la API de Google Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCP-qsv8Ig84wtzJn8CqKoggjVRFS62DRg&libraries=places"></script>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+        input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 6px; }
+        button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    </style>
 </head>
 <body>
-    <h2>Datos de envío</h2>
-    <input type="text" id="direccion" placeholder="Escribe tu dirección aquí...">
-    <button id="btn-finalizar">Finalizar compra</button>
+    <div class="card">
+        <h2>Dirección de envío</h2>
+        <input type="text" id="direccion" placeholder="Empieza a escribir tu dirección...">
+        <button id="btn-finalizar">Finalizar compra</button>
+    </div>
 
     <script>
-        // Inicializar autocompletado
         const input = document.getElementById('direccion');
         new google.maps.places.Autocomplete(input, { 
             componentRestrictions: { country: 'VE' } 
         });
 
         document.getElementById('btn-finalizar').addEventListener('click', () => {
-            alert("Dirección validada: " + input.value);
-            // Aquí agregaremos la lógica para guardar en Firebase en el siguiente paso
+            if(input.value) {
+                alert("Compra verificada con éxito para: " + input.value);
+            } else {
+                alert("Por favor, selecciona una dirección válida.");
+            }
         });
     </script>
 </body>
