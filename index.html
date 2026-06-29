@@ -24,16 +24,18 @@
         const provider = new GoogleAuthProvider();
 
         document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("btnGoogle").addEventListener("click", () => {
-                signInWithPopup(auth, provider)
-                    .then((result) => {
-                        alert("¡Bienvenido! Has iniciado sesión correctamente.");
-                        window.location.href = "https://www.izonelatam.work.gd/verificar-compra";
-                    })
-                    .catch((error) => {
-                        alert("Error al iniciar sesión: " + error.message);
-                    });
-            });
+            const btn = document.getElementById("btnGoogle");
+            if (btn) {
+                btn.addEventListener("click", () => {
+                    signInWithPopup(auth, provider)
+                        .then(() => {
+                            window.location.href = "https://www.izonelatam.work.gd/verificar-compra";
+                        })
+                        .catch((error) => {
+                            alert("Error al iniciar sesión: " + error.message);
+                        });
+                });
+            }
         });
     </script>
     <style>
@@ -42,6 +44,7 @@
         h2 { color: #333; margin-bottom: 20px; }
         button { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer; background: white; font-weight: bold; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
         button:hover { background: #f8f8f8; }
+        img { pointer-events: none; }
     </style>
 </head>
 <body>
