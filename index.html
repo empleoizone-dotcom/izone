@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso IZone B2B</title>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
@@ -21,33 +22,40 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // 1. Escuchar si ya estamos logueados
+        // Redirección automática si el usuario ya inició sesión
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // Si el usuario ya entró, enviarlo directamente
                 window.location.replace("https://izone.izonelatam.work.gd/verificar-compra.html");
             }
         });
 
-        // 2. Acción del botón
         document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("btnGoogle").addEventListener("click", () => {
-                signInWithPopup(auth, provider).catch((error) => {
-                    alert("Error: " + error.message);
+            const btn = document.getElementById("btnGoogle");
+            if (btn) {
+                btn.addEventListener("click", () => {
+                    signInWithPopup(auth, provider).catch((error) => {
+                        alert("Error al iniciar sesión: " + error.message);
+                    });
                 });
-            });
+            }
         });
     </script>
     <style>
-        body { font-family: sans-serif; background: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
-        button { padding: 12px 24px; cursor: pointer; background: white; border: 1px solid #ccc; border-radius: 6px; font-weight: bold; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 320px; text-align: center; }
+        h2 { color: #333; margin-bottom: 20px; }
+        button { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer; background: white; font-weight: bold; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        button:hover { background: #f8f8f8; }
+        img { pointer-events: none; }
     </style>
 </head>
 <body>
     <div class="login-card">
         <h2>Acceso IZone B2B</h2>
-        <button id="btnGoogle">Continuar con Google</button>
+        <button id="btnGoogle">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="20" alt="Google">
+            Continuar con Google
+        </button>
     </div>
 </body>
 </html>
